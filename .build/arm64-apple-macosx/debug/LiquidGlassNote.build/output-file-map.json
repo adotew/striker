@@ -1,0 +1,26 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/primary.swiftdeps"
+  },
+  "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/App.swift": {
+    "dependencies": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.d",
+    "object": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o",
+    "swiftmodule": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App~partial.swiftmodule",
+    "swift-dependencies": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swiftdeps",
+    "diagnostics": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.dia"
+  },
+  "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/BlurView.swift": {
+    "dependencies": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.d",
+    "object": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o",
+    "swiftmodule": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView~partial.swiftmodule",
+    "swift-dependencies": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swiftdeps",
+    "diagnostics": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.dia"
+  },
+  "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/ContentView.swift": {
+    "dependencies": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.d",
+    "object": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o",
+    "swiftmodule": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView~partial.swiftmodule",
+    "swift-dependencies": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swiftdeps",
+    "diagnostics": "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.dia"
+  }
+}
