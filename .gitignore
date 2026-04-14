@@ -1,0 +1,10 @@
+# SwiftPM / Xcode
+.build
+.swiftpm
+DerivedData
+
+# macOS noise
+.DS_Store
+
+# Swift Package Manager artifacts
+/.swiftpm/xcode/package.xcworkspace

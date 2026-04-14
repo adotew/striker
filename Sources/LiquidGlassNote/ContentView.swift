@@ -7,6 +7,7 @@ struct ContentView: View {
         ZStack {
             BlurView(material: .hudWindow, blendingMode: .behindWindow)
                 .ignoresSafeArea()
+                .allowsHitTesting(false) // keep the glass visual while letting the text editor receive clicks
 
             VStack(alignment: .leading, spacing: 14) {
                 Text("Liquid Glass Note")
