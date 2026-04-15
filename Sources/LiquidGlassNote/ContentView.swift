@@ -14,15 +14,13 @@ struct ContentView: View {
                     .font(.system(.title2, weight: .semibold))
                     .foregroundStyle(.secondary)
 
-                TextEditor(text: $text)
-                    .font(.system(.body, design: .rounded))
-                    .scrollContentBackground(.hidden)
-                    .background(Color.clear)
+                EditorTextView(text: $text)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 14)
                             .stroke(Color.white.opacity(0.18), lineWidth: 1)
+                            .allowsHitTesting(false)
                     )
             }
             .padding(24)

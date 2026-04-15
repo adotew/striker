@@ -9,3 +9,8 @@ script = ""
 name = "Ausgeführt"
 icon = "run"
 command = "swift build swift run"
+
+[[actions]]
+name = "Run Swift App"
+icon = "tool"
+command = "swift run"

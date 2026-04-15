@@ -19,37 +19,42 @@
   "swiftCommands" : {
     "C.LiquidGlassNote-arm64-apple-macosx-debug.module" : {
       "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
-      "fileList" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources",
-      "importPath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules",
+      "fileList" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources",
+      "importPath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules",
       "inputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/App.swift"
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/App.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/BlurView.swift"
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/BlurView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/ContentView.swift"
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/ContentView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/EditorTextView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"
         }
       ],
       "isLibrary" : false,
       "moduleName" : "LiquidGlassNote",
-      "moduleOutputPath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule",
+      "moduleOutputPath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule",
       "objects" : [
-        "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o",
-        "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o",
-        "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o"
+        "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o",
+        "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o",
+        "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o",
+        "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/EditorTextView.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -58,7 +63,7 @@
         "-enable-batch-mode",
         "-serialize-diagnostics",
         "-index-store-path",
-        "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/index/store",
+        "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/index/store",
         "-Onone",
         "-enable-testing",
         "-j8",
@@ -66,7 +71,7 @@
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
         "-module-cache-path",
-        "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/ModuleCache",
+        "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
         "-Xfrontend",
         "-entry-point-function-name",
@@ -101,32 +106,37 @@
         "-package-name",
         "swifty"
       ],
-      "outputFileMapPath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/output-file-map.json",
+      "outputFileMapPath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/output-file-map.json",
       "outputs" : [
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/EditorTextView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule"
         }
       ],
       "prepareForIndexing" : false,
       "sources" : [
-        "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/App.swift",
-        "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/BlurView.swift",
-        "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/ContentView.swift"
+        "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/App.swift",
+        "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/BlurView.swift",
+        "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/ContentView.swift",
+        "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/EditorTextView.swift"
       ],
-      "tempsPath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build",
+      "tempsPath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build",
       "wholeModuleOptimization" : false
     }
   },
@@ -141,18 +151,19 @@
       "-package-name",
       "swifty",
       "-c",
-      "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/App.swift",
-      "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/BlurView.swift",
-      "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/ContentView.swift",
+      "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/App.swift",
+      "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/BlurView.swift",
+      "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/ContentView.swift",
+      "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/EditorTextView.swift",
       "-I",
-      "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules",
+      "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules",
       "-target",
       "arm64-apple-macosx13.0",
       "-incremental",
       "-enable-batch-mode",
       "-serialize-diagnostics",
       "-index-store-path",
-      "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/index/store",
+      "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/index/store",
       "-Onone",
       "-enable-testing",
       "-j8",
@@ -160,7 +171,7 @@
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
       "-module-cache-path",
-      "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/ModuleCache",
+      "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
       "-Xfrontend",
       "-entry-point-function-name",
@@ -215,7 +226,7 @@
     }
   },
   "writeCommands" : {
-    "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist" : {
+    "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -227,9 +238,9 @@
           "name" : "<com.apple.security.get-task-allow>"
         }
       ],
-      "outputFilePath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"
+      "outputFilePath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"
     },
-    "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources" : {
+    "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -238,20 +249,24 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/App.swift"
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/App.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/BlurView.swift"
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/BlurView.swift"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/ContentView.swift"
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/EditorTextView.swift"
         }
       ],
-      "outputFilePath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"
+      "outputFilePath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"
     },
-    "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList" : {
+    "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList" : {
       "alwaysOutOfDate" : false,
       "inputs" : [
         {
@@ -260,20 +275,24 @@
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o"
         },
         {
           "kind" : "file",
-          "name" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o"
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/EditorTextView.swift.o"
         }
       ],
-      "outputFilePath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"
+      "outputFilePath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"
     },
-    "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+    "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
       "alwaysOutOfDate" : true,
       "inputs" : [
         {
@@ -285,7 +304,7 @@
           "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
         }
       ],
-      "outputFilePath" : "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+      "outputFilePath" : "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
     }
   }
 }

@@ -10,36 +10,36 @@ targets:
   "test": ["<LiquidGlassNote-arm64-apple-macosx-debug.exe>","<LiquidGlassNote-arm64-apple-macosx-debug.module>"]
 default: "main"
 nodes:
-  "/Users/ado0810/Desktop/swifty/Sources/":
+  "/Users/ado0810/Documents/coding/swifty/Sources/":
     is-directory-structure: true
     content-exclusion-patterns: [".git",".build"]
-  "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote":
+  "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote":
     is-mutated: true
 commands:
-  "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist":
+  "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist":
     tool: write-auxiliary-file
     inputs: ["<entitlement-plist>","<com.apple.security.get-task-allow>"]
-    outputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"]
-    description: "Write auxiliary file /Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"
+    outputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"]
+    description: "Write auxiliary file /Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"
 
-  "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources":
+  "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources":
     tool: write-auxiliary-file
-    inputs: ["<sources-file-list>","/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/App.swift","/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/BlurView.swift","/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/ContentView.swift"]
-    outputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"]
-    description: "Write auxiliary file /Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"
+    inputs: ["<sources-file-list>","/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/App.swift","/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/BlurView.swift","/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/ContentView.swift","/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/EditorTextView.swift"]
+    outputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"]
+    description: "Write auxiliary file /Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"
 
-  "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList":
+  "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList":
     tool: write-auxiliary-file
-    inputs: ["<link-file-list>","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o"]
-    outputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"]
-    description: "Write auxiliary file /Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"
+    inputs: ["<link-file-list>","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/EditorTextView.swift.o"]
+    outputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"
 
-  "/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+  "/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
     tool: write-auxiliary-file
     inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
-    outputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    outputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
     always-out-of-date: "true"
-    description: "Write auxiliary file /Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    description: "Write auxiliary file /Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
 
   "<LiquidGlassNote-arm64-apple-macosx-debug.exe>":
     tool: phony
@@ -48,33 +48,33 @@ commands:
 
   "<LiquidGlassNote-arm64-apple-macosx-debug.module>":
     tool: phony
-    inputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule"]
+    inputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/EditorTextView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule"]
     outputs: ["<LiquidGlassNote-arm64-apple-macosx-debug.module>"]
 
   "C.LiquidGlassNote-arm64-apple-macosx-debug.exe":
     tool: shell
-    inputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"]
-    outputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote"]
+    inputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/EditorTextView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList"]
+    outputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote"]
     description: "Linking ./.build/arm64-apple-macosx/debug/LiquidGlassNote"
-    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug","-o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote","-module-name","LiquidGlassNote","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-alias","-Xlinker","_LiquidGlassNote_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx13.0","-Xlinker","-add_ast_path","-Xlinker","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug","-o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote","-module-name","LiquidGlassNote","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-alias","-Xlinker","_LiquidGlassNote_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx13.0","-Xlinker","-add_ast_path","-Xlinker","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
 
   "C.LiquidGlassNote-arm64-apple-macosx-debug.exe-entitlements":
     tool: shell
-    inputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"]
+    inputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist"]
     outputs: ["<LiquidGlassNote-arm64-apple-macosx-debug.exe-CodeSigning>"]
     description: "Applying debug entitlements to ./.build/arm64-apple-macosx/debug/LiquidGlassNote"
-    args: ["codesign","--force","--sign","-","--entitlements","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote"]
+    args: ["codesign","--force","--sign","-","--entitlements","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote-entitlement.plist","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote"]
 
   "C.LiquidGlassNote-arm64-apple-macosx-debug.module":
     tool: shell
-    inputs: ["/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/App.swift","/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/BlurView.swift","/Users/ado0810/Desktop/swifty/Sources/LiquidGlassNote/ContentView.swift","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"]
-    outputs: ["/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule"]
-    description: "Compiling Swift Module 'LiquidGlassNote' (3 sources)"
-    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","LiquidGlassNote","-emit-dependencies","-emit-module","-emit-module-path","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule","-output-file-map","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/output-file-map.json","-incremental","-c","@/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources","-I","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx13.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j8","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/ado0810/Desktop/swifty/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","LiquidGlassNote_main","-color-diagnostics","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swifty"]
+    inputs: ["/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/App.swift","/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/BlurView.swift","/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/ContentView.swift","/Users/ado0810/Documents/coding/swifty/Sources/LiquidGlassNote/EditorTextView.swift","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources"]
+    outputs: ["/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/App.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/BlurView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/ContentView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/EditorTextView.swift.o","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule"]
+    description: "Compiling Swift Module 'LiquidGlassNote' (4 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","LiquidGlassNote","-emit-dependencies","-emit-module","-emit-module-path","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules/LiquidGlassNote.swiftmodule","-output-file-map","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/output-file-map.json","-incremental","-c","@/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/LiquidGlassNote.build/sources","-I","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx13.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j8","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/ado0810/Documents/coding/swifty/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","LiquidGlassNote_main","-color-diagnostics","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swifty"]
 
   "PackageStructure":
     tool: package-structure-tool
-    inputs: ["/Users/ado0810/Desktop/swifty/Sources/","/Users/ado0810/Desktop/swifty/Package.swift","/Users/ado0810/Desktop/swifty/Package.resolved"]
+    inputs: ["/Users/ado0810/Documents/coding/swifty/Sources/","/Users/ado0810/Documents/coding/swifty/Package.swift","/Users/ado0810/Documents/coding/swifty/Package.resolved"]
     outputs: ["<PackageStructure>"]
     description: "Planning build"
     allow-missing-inputs: true
