@@ -74,6 +74,32 @@ final class SidebarController: NSViewController {
         reload()
     }
 
+    func refresh() {
+        reload()
+    }
+
+    @discardableResult
+    func selectFile(_ url: URL) -> Bool {
+        guard let rootURL else { return false }
+        let standardizedRoot = rootURL.standardizedFileURL
+        let standardizedTarget = url.standardizedFileURL
+        guard standardizedTarget.path.hasPrefix(standardizedRoot.path) else { return false }
+
+        var parent = standardizedTarget.deletingLastPathComponent()
+        while parent.path.hasPrefix(standardizedRoot.path), parent != standardizedRoot {
+            expandedURLs.insert(parent)
+            parent = parent.deletingLastPathComponent()
+        }
+
+        reload()
+        guard let row = items.firstIndex(where: { $0.url.standardizedFileURL == standardizedTarget }) else {
+            return false
+        }
+        tableView.scrollRowToVisible(row)
+        tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+        return true
+    }
+
     /// Creates a new note in the directory of the currently selected item (or root).
     func createNoteInCurrentDirectory() {
         let targetDir: URL

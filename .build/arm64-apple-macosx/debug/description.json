@@ -48,7 +48,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FileWatcher.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FormattingToolbar.swift"
         },
         {
           "kind" : "file",
@@ -65,6 +73,10 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/PreferencesWindowController.swift"
         },
         {
           "kind" : "file",
@@ -241,11 +253,14 @@
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/DirectoryPicker.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/EditorViewController.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileManager+Notes.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileWatcher.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FloatingPanel.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FormattingToolbar.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/HotkeyManager.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MainViewController.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownStyle.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownTextStorage.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/PreferencesWindowController.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarController.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarItem.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/StatusBarController.swift.o",
@@ -336,7 +351,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileWatcher.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FloatingPanel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FormattingToolbar.swift.o"
         },
         {
           "kind" : "file",
@@ -353,6 +376,10 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownTextStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/PreferencesWindowController.swift.o"
         },
         {
           "kind" : "file",
@@ -387,11 +414,14 @@
         "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/EditorViewController.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/FileWatcher.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/FormattingToolbar.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownStyle.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/PreferencesWindowController.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/StatusBarController.swift",
@@ -419,11 +449,14 @@
       "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/EditorViewController.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/FileWatcher.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/FormattingToolbar.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownStyle.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/PreferencesWindowController.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/StatusBarController.swift",
@@ -556,7 +589,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FileWatcher.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FormattingToolbar.swift"
         },
         {
           "kind" : "file",
@@ -573,6 +614,10 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/PreferencesWindowController.swift"
         },
         {
           "kind" : "file",
@@ -766,7 +811,15 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileWatcher.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FloatingPanel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FormattingToolbar.swift.o"
         },
         {
           "kind" : "file",
@@ -783,6 +836,10 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownTextStorage.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/PreferencesWindowController.swift.o"
         },
         {
           "kind" : "file",

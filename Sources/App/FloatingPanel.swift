@@ -23,6 +23,7 @@ final class FloatingPanel: NSPanel {
         hidesOnDeactivate = false
         backgroundColor = .clear
         hasShadow = true
+        setFrameAutosaveName("StrikerFloatingPanelFrame")
 
         setupVisualEffect()
     }
@@ -66,7 +67,9 @@ final class FloatingPanel: NSPanel {
         if isVisible {
             orderOut(nil)
         } else {
-            center()
+            if !setFrameUsingName(frameAutosaveName) {
+                center()
+            }
             makeKeyAndOrderFront(nil)
         }
     }

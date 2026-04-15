@@ -11,6 +11,7 @@ final class EditorViewController: NSViewController {
 
     let markdownStorage = MarkdownTextStorage()
     private let autoSave  = AutoSaveController()
+    private let formattingToolbar = FormattingToolbar()
     private var currentURL: URL?
 
     // MARK: - View lifecycle
@@ -24,6 +25,7 @@ final class EditorViewController: NSViewController {
         setupScrollView()
         setupTextSystem()
         setupAutoSave()
+        setupFormattingToolbar()
     }
 
     override func viewDidAppear() {
@@ -39,6 +41,8 @@ final class EditorViewController: NSViewController {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         NotificationCenter.default.removeObserver(self, name: NSWindow.didResignKeyNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSView.boundsDidChangeNotification, object: scrollView.contentView)
+        formattingToolbar.hide()
     }
 
     // MARK: - Setup
@@ -49,6 +53,7 @@ final class EditorViewController: NSViewController {
         scrollView.hasHorizontalScroller = false
         scrollView.autohidesScrollers    = true
         scrollView.drawsBackground       = false
+        scrollView.contentView.postsBoundsChangedNotifications = true
         view.addSubview(scrollView)
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -107,8 +112,26 @@ final class EditorViewController: NSViewController {
 
     private func setupAutoSave() {
         autoSave.onSave = { [weak self] in
-            guard let self, let url = currentURL else { return }
-            try? FileManager.default.writeNote(at: url, content: textView.string)
+            self?.saveCurrentFile()
+        }
+    }
+
+    private func setupFormattingToolbar() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleScrollBoundsChange),
+            name: NSView.boundsDidChangeNotification,
+            object: scrollView.contentView
+        )
+    }
+
+    private func saveCurrentFile() {
+        guard let url = currentURL else { return }
+        do {
+            try FileManager.default.writeNote(at: url, content: textView.string)
+            NotificationCenter.default.post(name: .strikerDidSaveFile, object: url)
+        } catch {
+            NSSound.beep()
         }
     }
 
@@ -120,16 +143,7 @@ final class EditorViewController: NSViewController {
         currentURL = url
 
         let content = (try? FileManager.default.readNote(at: url)) ?? ""
-
-        // Replace text storage content and re-style
-        let fullRange = NSRange(location: 0, length: markdownStorage.length)
-        markdownStorage.replaceCharacters(in: fullRange, with: content)
-        markdownStorage.reapplyAllStyles()
-
-        textView.undoManager?.removeAllActions()
-        autoSave.reset()
-        textView.scrollToBeginningOfDocument(nil)
-        view.window?.makeFirstResponder(textView)
+        applyLoadedContent(content, resetScrollPosition: true)
     }
 
     /// Force-saves immediately (e.g. Cmd+S).
@@ -138,17 +152,61 @@ final class EditorViewController: NSViewController {
     }
 
     var isDirty: Bool { autoSave.isDirty }
+    var currentFileURL: URL? { currentURL }
+    var isRawMode: Bool { markdownStorage.isRawMode }
+
+    func reloadCurrentFileFromDisk() {
+        guard let url = currentURL else { return }
+        let selected = textView.selectedRange()
+        let content = (try? FileManager.default.readNote(at: url)) ?? ""
+        applyLoadedContent(content, resetScrollPosition: false)
+        let maxLoc = max(0, min(selected.location, markdownStorage.length))
+        textView.setSelectedRange(NSRange(location: maxLoc, length: 0))
+    }
 
     // MARK: - Raw mode toggle
 
     func toggleRawMode() {
         markdownStorage.isRawMode.toggle()
+        updateFormattingToolbar()
     }
 
     // MARK: - Window key notifications
 
     @objc private func windowDidResignKey(_ notification: Notification) {
         autoSave.saveNow()
+        formattingToolbar.hide()
+    }
+
+    @objc private func handleScrollBoundsChange(_ notification: Notification) {
+        updateFormattingToolbar()
+    }
+
+    private func applyLoadedContent(_ content: String, resetScrollPosition: Bool) {
+        let fullRange = NSRange(location: 0, length: markdownStorage.length)
+        markdownStorage.replaceCharacters(in: fullRange, with: content)
+        markdownStorage.reapplyAllStyles()
+
+        textView.undoManager?.removeAllActions()
+        autoSave.reset()
+        if resetScrollPosition {
+            textView.scrollToBeginningOfDocument(nil)
+        }
+        updateFormattingToolbar()
+        view.window?.makeFirstResponder(textView)
+    }
+
+    private func updateFormattingToolbar() {
+        guard view.window?.isVisible == true else {
+            formattingToolbar.hide()
+            return
+        }
+        let selection = textView.selectedRange()
+        guard selection.length > 0 else {
+            formattingToolbar.hide()
+            return
+        }
+        formattingToolbar.show(for: textView)
     }
 }
 
@@ -157,6 +215,11 @@ final class EditorViewController: NSViewController {
 extension EditorViewController: NSTextViewDelegate {
     func textDidChange(_ notification: Notification) {
         autoSave.markDirty()
+        updateFormattingToolbar()
+    }
+
+    func textViewDidChangeSelection(_ notification: Notification) {
+        updateFormattingToolbar()
     }
 }
 
@@ -186,4 +249,5 @@ extension EditorViewController: StrikerTextViewDelegate {
 extension Notification.Name {
     static let strikerHidePanel = Notification.Name("strikerHidePanel")
     static let strikerNewNote   = Notification.Name("strikerNewNote")
+    static let strikerDidSaveFile = Notification.Name("strikerDidSaveFile")
 }
