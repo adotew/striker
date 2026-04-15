@@ -21,10 +21,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarController = StatusBarController(panel: floatingPanel)
         hotkeyManager = HotkeyManager(panel: floatingPanel)
 
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(hidePanel),
+            name: .strikerHidePanel,
+            object: nil
+        )
+
         if let url = DirectoryPicker.resolveBookmark() {
             mainViewController.setDirectory(url)
         } else {
-            // Show panel first so the open dialog feels anchored to the app
             floatingPanel.toggle()
             DirectoryPicker.pick { [weak self] url in
                 guard let url else { return }
@@ -36,6 +42,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ notification: Notification) {
-        // TODO 3.2: autosave on quit
+        mainViewController.editorViewController.save()
+    }
+
+    @objc private func hidePanel() {
+        floatingPanel.toggle()
     }
 }

@@ -74,6 +74,22 @@ final class SidebarController: NSViewController {
         reload()
     }
 
+    /// Creates a new note in the directory of the currently selected item (or root).
+    func createNoteInCurrentDirectory() {
+        let targetDir: URL
+        let selectedRow = tableView.selectedRow
+        if selectedRow >= 0 {
+            let item = items[selectedRow]
+            targetDir = item.isDirectory ? item.url : item.url.deletingLastPathComponent()
+        } else {
+            targetDir = rootURL ?? URL(fileURLWithPath: NSHomeDirectory())
+        }
+        guard let newURL = try? FileManager.default.createNote(in: targetDir) else { return }
+        reload()
+        select(url: newURL)
+        promptRename(url: newURL)
+    }
+
     // MARK: - Internal
 
     private func reload() {
