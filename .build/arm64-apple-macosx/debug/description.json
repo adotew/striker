@@ -32,6 +32,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/CMarkParser.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift"
         },
         {
@@ -53,6 +57,14 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownStyle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift"
         },
         {
           "kind" : "file",
@@ -80,6 +92,142 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/autolink.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/core-extensions.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/ext_scanners.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/strikethrough.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/table.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/tagfilter.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/tasklist.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/arena.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/blocks.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/buffer.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/cmark.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/cmark_ctype.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/commonmark.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/footnotes.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/houdini_href_e.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/houdini_html_e.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/houdini_html_u.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/html.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/inlines.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/iterator.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/latex.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/linked_list.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/man.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/map.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/node.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/plaintext.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/plugin.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/references.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/registry.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/render.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/scanners.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/syntax_extension.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/utf8.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/xml.c.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/sources"
         }
       ],
@@ -89,12 +237,15 @@
       "objects" : [
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/AppDelegate.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/AutoSaveController.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/CMarkParser.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/DirectoryPicker.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/EditorViewController.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileManager+Notes.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FloatingPanel.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/HotkeyManager.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MainViewController.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownStyle.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownTextStorage.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarController.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarItem.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/StatusBarController.swift.o",
@@ -115,6 +266,12 @@
         "-DSWIFT_PACKAGE",
         "-DDEBUG",
         "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-Xcc",
+        "-fmodule-map-file=/Users/ado0810/Documents/coding/striker/Sources/CMarkGFM/include/module.modulemap",
+        "-Xcc",
+        "-I",
+        "-Xcc",
+        "/Users/ado0810/Documents/coding/striker/Sources/CMarkGFM/include",
         "-module-cache-path",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/ModuleCache",
         "-parseable-output",
@@ -163,6 +320,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/CMarkParser.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/DirectoryPicker.swift.o"
         },
         {
@@ -184,6 +345,14 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MainViewController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownStyle.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownTextStorage.swift.o"
         },
         {
           "kind" : "file",
@@ -214,12 +383,15 @@
       "sources" : [
         "/Users/ado0810/Documents/coding/striker/Sources/App/AppDelegate.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/AutoSaveController.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/CMarkParser.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/EditorViewController.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownStyle.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/StatusBarController.swift",
@@ -243,12 +415,15 @@
       "-c",
       "/Users/ado0810/Documents/coding/striker/Sources/App/AppDelegate.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/AutoSaveController.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/CMarkParser.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/EditorViewController.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownStyle.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/StatusBarController.swift",
@@ -269,6 +444,12 @@
       "-DSWIFT_PACKAGE",
       "-DDEBUG",
       "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-Xcc",
+      "-fmodule-map-file=/Users/ado0810/Documents/coding/striker/Sources/CMarkGFM/include/module.modulemap",
+      "-Xcc",
+      "-I",
+      "-Xcc",
+      "/Users/ado0810/Documents/coding/striker/Sources/CMarkGFM/include",
       "-module-cache-path",
       "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/ModuleCache",
       "-parseable-output",
@@ -309,8 +490,11 @@
     ]
   },
   "targetDependencyMap" : {
-    "Striker" : [
+    "CMarkGFM" : [
 
+    ],
+    "Striker" : [
+      "CMarkGFM"
     ]
   },
   "testDiscoveryCommands" : {
@@ -356,6 +540,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/CMarkParser.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift"
         },
         {
@@ -377,6 +565,14 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownStyle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MarkdownTextStorage.swift"
         },
         {
           "kind" : "file",
@@ -410,11 +606,151 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/autolink.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/core-extensions.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/ext_scanners.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/strikethrough.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/table.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/tagfilter.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/extensions/tasklist.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/arena.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/blocks.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/buffer.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/cmark.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/cmark_ctype.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/commonmark.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/footnotes.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/houdini_href_e.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/houdini_html_e.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/houdini_html_u.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/html.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/inlines.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/iterator.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/latex.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/linked_list.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/man.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/map.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/node.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/plaintext.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/plugin.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/references.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/registry.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/render.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/scanners.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/syntax_extension.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/utf8.c.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/CMarkGFM.build/src/xml.c.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/AppDelegate.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/AutoSaveController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/CMarkParser.swift.o"
         },
         {
           "kind" : "file",
@@ -439,6 +775,14 @@
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MainViewController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownStyle.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MarkdownTextStorage.swift.o"
         },
         {
           "kind" : "file",

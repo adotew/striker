@@ -4,11 +4,12 @@ final class EditorViewController: NSViewController {
 
     // MARK: - Subviews
 
-    let textView   = StrikerTextView()
+    private(set) var textView: StrikerTextView!
     let scrollView = NSScrollView()
 
     // MARK: - State
 
+    let markdownStorage = MarkdownTextStorage()
     private let autoSave  = AutoSaveController()
     private var currentURL: URL?
 
@@ -21,7 +22,7 @@ final class EditorViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
-        setupTextView()
+        setupTextSystem()
         setupAutoSave()
     }
 
@@ -57,13 +58,23 @@ final class EditorViewController: NSViewController {
         ])
     }
 
-    private func setupTextView() {
+    private func setupTextSystem() {
+        // Build custom text system chain:
+        // MarkdownTextStorage → NSLayoutManager → NSTextContainer → StrikerTextView
+        let layoutManager = NSLayoutManager()
+        markdownStorage.addLayoutManager(layoutManager)
+
+        let containerSize = NSSize(width: scrollView.contentSize.width, height: .greatestFiniteMagnitude)
+        let textContainer = NSTextContainer(size: containerSize)
+        textContainer.widthTracksTextView = true
+        layoutManager.addTextContainer(textContainer)
+
+        textView = StrikerTextView(frame: .zero, textContainer: textContainer)
+
         // Layout
         textView.autoresizingMask        = [.width]
         textView.isVerticallyResizable   = true
         textView.isHorizontallyResizable = false
-        textView.textContainer?.widthTracksTextView  = true
-        textView.textContainer?.containerSize = NSSize(width: scrollView.contentSize.width, height: .greatestFiniteMagnitude)
         textView.textContainerInset = NSSize(width: 20, height: 20)
 
         // Editing
@@ -73,9 +84,9 @@ final class EditorViewController: NSViewController {
         textView.isSelectable = true
         textView.drawsBackground = false
 
-        // Font — JetBrains Mono with system monospace fallback
-        textView.font = NSFont(name: "JetBrainsMono-Regular", size: 13)
-                     ?? NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
+        // Font — set on text storage via base attributes, but also set on textView
+        // for the insertion point attributes
+        textView.font = MarkdownStyle.baseFont
         textView.textColor = .labelColor
 
         // Kill autocorrect / substitutions
@@ -109,7 +120,12 @@ final class EditorViewController: NSViewController {
         currentURL = url
 
         let content = (try? FileManager.default.readNote(at: url)) ?? ""
-        textView.string = content
+
+        // Replace text storage content and re-style
+        let fullRange = NSRange(location: 0, length: markdownStorage.length)
+        markdownStorage.replaceCharacters(in: fullRange, with: content)
+        markdownStorage.reapplyAllStyles()
+
         textView.undoManager?.removeAllActions()
         autoSave.reset()
         textView.scrollToBeginningOfDocument(nil)
@@ -122,6 +138,12 @@ final class EditorViewController: NSViewController {
     }
 
     var isDirty: Bool { autoSave.isDirty }
+
+    // MARK: - Raw mode toggle
+
+    func toggleRawMode() {
+        markdownStorage.isRawMode.toggle()
+    }
 
     // MARK: - Window key notifications
 
@@ -152,6 +174,10 @@ extension EditorViewController: StrikerTextViewDelegate {
 
     func strikerTextViewNewNote(_ textView: StrikerTextView) {
         NotificationCenter.default.post(name: .strikerNewNote, object: nil)
+    }
+
+    func strikerTextViewToggleRawMode(_ textView: StrikerTextView) {
+        toggleRawMode()
     }
 }
 

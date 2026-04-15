@@ -8,8 +8,23 @@ let package = Package(
         .executable(name: "Striker", targets: ["Striker"]),
     ],
     targets: [
+        .target(
+            name: "CMarkGFM",
+            path: "Sources/CMarkGFM",
+            exclude: [
+                "src/entities.inc",
+                "src/case_fold_switch.inc",
+            ],
+            sources: ["src", "extensions"],
+            publicHeadersPath: "include",
+            cSettings: [
+                .headerSearchPath("src"),
+                .headerSearchPath("extensions"),
+            ]
+        ),
         .executableTarget(
             name: "Striker",
+            dependencies: ["CMarkGFM"],
             path: "Sources/App"
         )
     ]

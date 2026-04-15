@@ -1,0 +1,9 @@
+module CMarkGFM {
+    header "cmark-gfm.h"
+    header "cmark-gfm-extension_api.h"
+    header "cmark-gfm_version.h"
+    header "cmark-gfm-core-extensions.h"
+    header "strikethrough.h"
+    header "table.h"
+    export *
+}
