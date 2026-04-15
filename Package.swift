@@ -2,15 +2,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "LiquidGlassNote",
+    name: "Striker",
     platforms: [.macOS(.v13)],
     products: [
-        .executable(name: "LiquidGlassNote", targets: ["LiquidGlassNote"]),
+        .executable(name: "Striker", targets: ["Striker"]),
     ],
     targets: [
         .executableTarget(
-            name: "LiquidGlassNote",
-            path: "Sources"
+            name: "Striker",
+            path: "Sources/App"
         )
     ]
 )
