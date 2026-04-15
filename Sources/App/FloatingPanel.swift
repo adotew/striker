@@ -32,6 +32,8 @@ final class FloatingPanel: NSPanel {
 
     // MARK: - Liquid glass background
 
+    private var visualEffectView: NSVisualEffectView!
+
     private func setupVisualEffect() {
         let vev = NSVisualEffectView()
         vev.material = .hudWindow
@@ -41,6 +43,21 @@ final class FloatingPanel: NSPanel {
         vev.layer?.cornerRadius = 16
         vev.layer?.masksToBounds = true
         contentView = vev
+        visualEffectView = vev
+    }
+
+    /// Pins a view controller's view inside the liquid glass background.
+    /// Use this instead of `contentViewController` to preserve the visual effect layer.
+    func setMainContent(viewController: NSViewController) {
+        let child = viewController.view
+        child.translatesAutoresizingMaskIntoConstraints = false
+        visualEffectView.addSubview(child)
+        NSLayoutConstraint.activate([
+            child.topAnchor.constraint(equalTo: visualEffectView.topAnchor),
+            child.leadingAnchor.constraint(equalTo: visualEffectView.leadingAnchor),
+            child.trailingAnchor.constraint(equalTo: visualEffectView.trailingAnchor),
+            child.bottomAnchor.constraint(equalTo: visualEffectView.bottomAnchor),
+        ])
     }
 
     // MARK: - Show / hide

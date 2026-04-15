@@ -28,11 +28,31 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift"
         },
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift"
         },
         {
           "kind" : "file",
@@ -56,8 +76,13 @@
       "moduleOutputPath" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Modules/Striker.swiftmodule",
       "objects" : [
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/AppDelegate.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/DirectoryPicker.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileManager+Notes.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FloatingPanel.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/HotkeyManager.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MainViewController.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarController.swift.o",
+        "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarItem.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/StatusBarController.swift.o",
         "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/main.swift.o"
       ],
@@ -119,11 +144,31 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/DirectoryPicker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileManager+Notes.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FloatingPanel.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/HotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MainViewController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarItem.swift.o"
         },
         {
           "kind" : "file",
@@ -141,8 +186,13 @@
       "prepareForIndexing" : false,
       "sources" : [
         "/Users/ado0810/Documents/coding/striker/Sources/App/AppDelegate.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift",
+        "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/StatusBarController.swift",
         "/Users/ado0810/Documents/coding/striker/Sources/App/main.swift"
       ],
@@ -162,8 +212,13 @@
       "striker",
       "-c",
       "/Users/ado0810/Documents/coding/striker/Sources/App/AppDelegate.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift",
+      "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/StatusBarController.swift",
       "/Users/ado0810/Documents/coding/striker/Sources/App/main.swift",
       "-I",
@@ -264,11 +319,31 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/DirectoryPicker.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FileManager+Notes.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/FloatingPanel.swift"
         },
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/HotkeyManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/MainViewController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/Sources/App/SidebarItem.swift"
         },
         {
           "kind" : "file",
@@ -294,11 +369,31 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/DirectoryPicker.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FileManager+Notes.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/FloatingPanel.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/HotkeyManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/MainViewController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/ado0810/Documents/coding/striker/.build/arm64-apple-macosx/debug/Striker.build/SidebarItem.swift.o"
         },
         {
           "kind" : "file",
