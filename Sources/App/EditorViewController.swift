@@ -203,7 +203,7 @@ final class EditorViewController: NSViewController {
     }
 
     private func updateFormattingToolbar() {
-        guard view.window?.isVisible == true else {
+        guard view.window?.isVisible == true, !markdownStorage.isRawMode else {
             formattingToolbar.hide()
             return
         }
