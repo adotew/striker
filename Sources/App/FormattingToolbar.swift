@@ -5,23 +5,25 @@ import AppKit
 final class FormattingToolbar: NSPanel {
 
     private weak var targetTextView: NSTextView?
+    private var buttons: [NSButton] = []
 
     private struct Action {
         let title: String
         let symbol: String
         let prefix: String
         let suffix: String
+        let matchesNodeType: ((MarkdownNodeType) -> Bool)?
     }
 
     private static let actions: [Action] = [
-        Action(title: "H1", symbol: "textformat.size.larger", prefix: "# ", suffix: ""),
-        Action(title: "H2", symbol: "textformat.size", prefix: "## ", suffix: ""),
-        Action(title: "H3", symbol: "textformat.size.smaller", prefix: "### ", suffix: ""),
-        Action(title: "B",  symbol: "bold", prefix: "**", suffix: "**"),
-        Action(title: "I",  symbol: "italic", prefix: "*", suffix: "*"),
-        Action(title: "S",  symbol: "strikethrough", prefix: "~~", suffix: "~~"),
-        Action(title: "<>", symbol: "chevron.left.forwardslash.chevron.right", prefix: "`", suffix: "`"),
-        Action(title: "🔗", symbol: "link", prefix: "[", suffix: "](url)"),
+        Action(title: "H1", symbol: "textformat.size.larger",                   prefix: "# ",   suffix: "",       matchesNodeType: nil),
+        Action(title: "H2", symbol: "textformat.size",                           prefix: "## ",  suffix: "",       matchesNodeType: nil),
+        Action(title: "H3", symbol: "textformat.size.smaller",                   prefix: "### ", suffix: "",       matchesNodeType: nil),
+        Action(title: "B",  symbol: "bold",                                      prefix: "**",   suffix: "**",     matchesNodeType: { $0 == .strong }),
+        Action(title: "I",  symbol: "italic",                                    prefix: "*",    suffix: "*",      matchesNodeType: { $0 == .emphasis }),
+        Action(title: "S",  symbol: "strikethrough",                             prefix: "~~",   suffix: "~~",     matchesNodeType: { $0 == .strikethrough }),
+        Action(title: "<>", symbol: "chevron.left.forwardslash.chevron.right",   prefix: "`",    suffix: "`",      matchesNodeType: { $0 == .code }),
+        Action(title: "🔗", symbol: "link",                                      prefix: "[",    suffix: "](url)", matchesNodeType: { if case .link = $0 { return true }; return false }),
     ]
 
     init() {
@@ -70,6 +72,7 @@ final class FormattingToolbar: NSPanel {
             stack.bottomAnchor.constraint(equalTo: vev.bottomAnchor),
         ])
 
+        buttons = []
         for (index, action) in Self.actions.enumerated() {
             let btn = NSButton()
             btn.bezelStyle = .accessoryBarAction
@@ -89,6 +92,7 @@ final class FormattingToolbar: NSPanel {
             btn.widthAnchor.constraint(equalToConstant: 32).isActive = true
             btn.heightAnchor.constraint(equalToConstant: 28).isActive = true
             stack.addArrangedSubview(btn)
+            buttons.append(btn)
         }
     }
 
@@ -102,9 +106,10 @@ final class FormattingToolbar: NSPanel {
         guard selRange.length > 0 else { hide(); return }
 
         // Get the rect of the selection in window coordinates
-        let layoutManager = textView.layoutManager!
+        guard let layoutManager = textView.layoutManager,
+              let textContainer = textView.textContainer else { return }
         let glyphRange = layoutManager.glyphRange(forCharacterRange: selRange, actualCharacterRange: nil)
-        var selRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textView.textContainer!)
+        var selRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
         selRect.origin.x += textView.textContainerOrigin.x
         selRect.origin.y += textView.textContainerOrigin.y
 
@@ -113,7 +118,6 @@ final class FormattingToolbar: NSPanel {
 
         // Position toolbar above selection, centered
         let toolbarWidth = frame.width
-        let toolbarHeight = frame.height
         var x = rectOnScreen.midX - toolbarWidth / 2
         let y = rectOnScreen.maxY + 6
 
@@ -124,12 +128,42 @@ final class FormattingToolbar: NSPanel {
         }
 
         setFrameOrigin(NSPoint(x: x, y: y))
+        updateButtonStates(for: textView)
         orderFront(nil)
     }
 
     func hide() {
         orderOut(nil)
         targetTextView = nil
+    }
+
+    // MARK: - Button state detection
+
+    private func updateButtonStates(for textView: NSTextView) {
+        let selRange = textView.selectedRange()
+        guard selRange.length > 0 else { return }
+
+        let nsString = textView.string as NSString
+        let parsed = CMarkParser.parse(textView.string)
+
+        for (index, action) in Self.actions.enumerated() {
+            let isActive: Bool
+            if action.suffix.isEmpty {
+                // Heading: check raw line text for prefix
+                let lineRange = nsString.lineRange(for: selRange)
+                let lineText = nsString.substring(with: lineRange)
+                isActive = lineText.hasPrefix(action.prefix)
+            } else if let matcher = action.matchesNodeType {
+                // Inline: check parsed ranges for overlap with selection
+                isActive = parsed.contains { mdRange in
+                    matcher(mdRange.type) && NSIntersectionRange(mdRange.range, selRange).length > 0
+                }
+            } else {
+                isActive = false
+            }
+
+            buttons[index].contentTintColor = isActive ? .controlAccentColor : nil
+        }
     }
 
     // MARK: - Actions
@@ -141,22 +175,18 @@ final class FormattingToolbar: NSPanel {
         let action = Self.actions[sender.tag]
         let selRange = textView.selectedRange()
 
-        // Get the selected text
         let nsString = textView.string as NSString
         let selectedText = nsString.substring(with: selRange)
 
-        // Check if this is a heading action (prefix-only, no suffix)
         if action.suffix.isEmpty {
             // Heading: wrap entire line — find line boundaries
             let lineRange = nsString.lineRange(for: selRange)
             let lineText = nsString.substring(with: lineRange).trimmingCharacters(in: .newlines)
 
-            // Strip existing heading prefix if toggling
             let newText: String
             if lineText.hasPrefix(action.prefix) {
                 newText = String(lineText.dropFirst(action.prefix.count))
             } else {
-                // Strip any existing heading prefix first
                 let stripped = lineText.replacingOccurrences(
                     of: "^#{1,6}\\s*",
                     with: "",
@@ -175,23 +205,37 @@ final class FormattingToolbar: NSPanel {
                 textView.didChangeText()
             }
         } else {
-            // Inline wrapper: toggle prefix/suffix around selection
-            let newText: String
-            if selectedText.hasPrefix(action.prefix) && selectedText.hasSuffix(action.suffix)
-                && selectedText.count >= action.prefix.count + action.suffix.count {
-                // Unwrap
-                let start = selectedText.index(selectedText.startIndex, offsetBy: action.prefix.count)
-                let end = selectedText.index(selectedText.endIndex, offsetBy: -action.suffix.count)
-                newText = String(selectedText[start..<end])
-            } else {
-                // Wrap
-                newText = action.prefix + selectedText + action.suffix
-            }
+            // Inline wrapper: use CMarkParser to detect active range (works in both raw and styled mode)
+            let parsed = CMarkParser.parse(textView.string)
+            let activeNodeRange: NSRange? = {
+                guard let matcher = action.matchesNodeType else { return nil }
+                return parsed.first(where: { mdRange in
+                    matcher(mdRange.type) && NSIntersectionRange(mdRange.range, selRange).length > 0
+                })?.range
+            }()
 
-            if textView.shouldChangeText(in: selRange, replacementString: newText) {
-                textView.replaceCharacters(in: selRange, with: newText)
-                textView.didChangeText()
+            if let fullRange = activeNodeRange {
+                // Unwrap: remove delimiters from the full node range in raw text
+                let fullText = nsString.substring(with: fullRange)
+                let prefixCount = action.prefix.count
+                let suffixCount = action.suffix.count
+                guard fullText.count >= prefixCount + suffixCount else { return }
+                let start = fullText.index(fullText.startIndex, offsetBy: prefixCount)
+                let end   = fullText.index(fullText.endIndex,   offsetBy: -suffixCount)
+                let content = String(fullText[start..<end])
+                if textView.shouldChangeText(in: fullRange, replacementString: content) {
+                    textView.replaceCharacters(in: fullRange, with: content)
+                    textView.didChangeText()
+                }
+            } else {
+                // Wrap selection
+                let newText = action.prefix + selectedText + action.suffix
+                if textView.shouldChangeText(in: selRange, replacementString: newText) {
+                    textView.replaceCharacters(in: selRange, with: newText)
+                    textView.didChangeText()
+                }
             }
+            updateButtonStates(for: textView)
         }
     }
 }

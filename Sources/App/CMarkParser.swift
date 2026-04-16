@@ -3,7 +3,7 @@ import CMarkGFM
 
 // MARK: - Node types for styling
 
-enum MarkdownNodeType {
+enum MarkdownNodeType: Equatable {
     case heading(level: Int)     // # through ####
     case strong                  // **bold**
     case emphasis                // *italic*
