@@ -24,7 +24,7 @@ final class StatusBarController {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         guard let button = statusItem.button else { return }
-        button.image = NSImage(systemSymbolName: "note.text", accessibilityDescription: "Striker")
+        button.image = NSImage(systemSymbolName: "richtext.page", accessibilityDescription: "Striker")
         button.image?.isTemplate = true
         button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         button.action = #selector(handleClick(_:))
@@ -107,6 +107,5 @@ final class StatusBarController {
     }
 
     private func updateStatusHighlight() {
-        statusItem.button?.contentTintColor = panel.isVisible ? NSColor.controlAccentColor : nil
     }
 }
