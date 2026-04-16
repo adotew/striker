@@ -242,12 +242,17 @@ extension EditorViewController: StrikerTextViewDelegate {
     func strikerTextViewToggleRawMode(_ textView: StrikerTextView) {
         toggleRawMode()
     }
+
+    func strikerTextViewToggleSidebar(_ textView: StrikerTextView) {
+        NotificationCenter.default.post(name: .strikerToggleSidebar, object: nil)
+    }
 }
 
 // MARK: - Notification names
 
 extension Notification.Name {
-    static let strikerHidePanel = Notification.Name("strikerHidePanel")
-    static let strikerNewNote   = Notification.Name("strikerNewNote")
-    static let strikerDidSaveFile = Notification.Name("strikerDidSaveFile")
+    static let strikerHidePanel    = Notification.Name("strikerHidePanel")
+    static let strikerNewNote      = Notification.Name("strikerNewNote")
+    static let strikerDidSaveFile  = Notification.Name("strikerDidSaveFile")
+    static let strikerToggleSidebar = Notification.Name("strikerToggleSidebar")
 }

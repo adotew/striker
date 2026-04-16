@@ -7,17 +7,20 @@ final class StatusBarController {
     private let onOpenPreferences: () -> Void
     private let onToggleRawMode: () -> Void
     private let isRawModeEnabled: () -> Bool
+    private let onToggleSidebar: () -> Void
 
     init(
         panel: FloatingPanel,
         onOpenPreferences: @escaping () -> Void,
         onToggleRawMode: @escaping () -> Void,
-        isRawModeEnabled: @escaping () -> Bool
+        isRawModeEnabled: @escaping () -> Bool,
+        onToggleSidebar: @escaping () -> Void
     ) {
         self.panel = panel
         self.onOpenPreferences = onOpenPreferences
         self.onToggleRawMode = onToggleRawMode
         self.isRawModeEnabled = isRawModeEnabled
+        self.onToggleSidebar = onToggleSidebar
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         guard let button = statusItem.button else { return }
@@ -66,6 +69,9 @@ final class StatusBarController {
         rawModeItem.target = self
         rawModeItem.state = isRawModeEnabled() ? .on : .off
 
+        let sidebarItem = menu.addItem(withTitle: "Toggle Sidebar", action: #selector(toggleSidebar), keyEquivalent: "b")
+        sidebarItem.target = self
+
         menu.addItem(.separator())
 
         let preferencesItem = menu.addItem(withTitle: "Preferences…", action: #selector(openPreferences), keyEquivalent: ",")
@@ -86,6 +92,10 @@ final class StatusBarController {
 
     @objc private func toggleRawMode() {
         onToggleRawMode()
+    }
+
+    @objc private func toggleSidebar() {
+        onToggleSidebar()
     }
 
     @objc private func openPreferences() {

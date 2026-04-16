@@ -30,7 +30,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             panel: floatingPanel,
             onOpenPreferences: { [weak self] in self?.showPreferences() },
             onToggleRawMode: { [weak self] in self?.mainViewController.toggleRawMode() },
-            isRawModeEnabled: { [weak self] in self?.mainViewController.isRawMode ?? false }
+            isRawModeEnabled: { [weak self] in self?.mainViewController.isRawMode ?? false },
+            onToggleSidebar: { [weak self] in self?.mainViewController.toggleSidebar(nil) }
         )
         hotkeyManager = HotkeyManager(panel: floatingPanel)
 

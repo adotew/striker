@@ -7,6 +7,7 @@ protocol StrikerTextViewDelegate: AnyObject {
     func strikerTextViewNewNote(_ textView: StrikerTextView)
     func strikerTextViewClose(_ textView: StrikerTextView)
     func strikerTextViewToggleRawMode(_ textView: StrikerTextView)
+    func strikerTextViewToggleSidebar(_ textView: StrikerTextView)
 }
 
 // MARK: - StrikerTextView
@@ -58,6 +59,9 @@ final class StrikerTextView: NSTextView {
             return true
         case "r" where shift:
             strikerDelegate?.strikerTextViewToggleRawMode(self)
+            return true
+        case "b":
+            strikerDelegate?.strikerTextViewToggleSidebar(self)
             return true
         default:
             return super.performKeyEquivalent(with: event)

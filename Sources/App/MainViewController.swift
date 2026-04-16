@@ -39,6 +39,13 @@ final class MainViewController: NSSplitViewController {
             object: nil
         )
 
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleToggleSidebar),
+            name: .strikerToggleSidebar,
+            object: nil
+        )
+
         fileWatcher.onEvents = { [weak self] urls in
             self?.handleFileWatcherEvents(urls)
         }
@@ -62,6 +69,10 @@ final class MainViewController: NSSplitViewController {
 
     var isRawMode: Bool {
         editorViewController.isRawMode
+    }
+
+    @objc private func handleToggleSidebar() {
+        toggleSidebar(nil)
     }
 
     @objc private func handleNewNote() {
