@@ -23,6 +23,10 @@ final class SidebarController: NSViewController {
     private var items: [SidebarItem] = []
     private var expandedURLs: Set<URL> = []
     private var collapsedRoots: Set<URL> = []
+    private var hiddenFileURLs: Set<URL> = {
+        let paths = UserDefaults.standard.stringArray(forKey: "hiddenFilePaths") ?? []
+        return Set(paths.map { URL(fileURLWithPath: $0).standardizedFileURL })
+    }()
 
     // MARK: - View lifecycle
 
@@ -162,7 +166,8 @@ final class SidebarController: NSViewController {
                         url: root,
                         depth: 1,
                         expandedURLs: expandedURLs,
-                        rootURL: root
+                        rootURL: root,
+                        hiddenURLs: hiddenFileURLs
                     )
                 }
             } else {
@@ -170,7 +175,8 @@ final class SidebarController: NSViewController {
                     url: root,
                     depth: 0,
                     expandedURLs: expandedURLs,
-                    rootURL: root
+                    rootURL: root,
+                    hiddenURLs: hiddenFileURLs
                 )
             }
         }
@@ -306,6 +312,9 @@ extension SidebarController: NSMenuDelegate {
             addMenuItem(to: menu, title: "New Folder", action: #selector(menuNewFolder(_:)), object: targetDir)
             menu.addItem(.separator())
             addMenuItem(to: menu, title: "Rename", action: #selector(menuRename(_:)), object: item.url)
+            if !item.isDirectory {
+                addMenuItem(to: menu, title: "Remove", action: #selector(menuRemoveFile(_:)), object: item.url)
+            }
             addMenuItem(to: menu, title: "Delete", action: #selector(menuDelete(_:)), object: item.url)
 
         } else {
@@ -355,6 +364,13 @@ extension SidebarController: NSMenuDelegate {
             try? FileManager.default.deleteNote(at: url)
             self?.reload()
         }
+    }
+
+    @objc private func menuRemoveFile(_ sender: NSMenuItem) {
+        guard let url = sender.representedObject as? URL else { return }
+        hiddenFileURLs.insert(url.standardizedFileURL)
+        UserDefaults.standard.set(hiddenFileURLs.map(\.path), forKey: "hiddenFilePaths")
+        reload()
     }
 
     @objc private func menuRemoveRoot(_ sender: NSMenuItem) {

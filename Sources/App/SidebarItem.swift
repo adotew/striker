@@ -29,7 +29,8 @@ struct SidebarItem {
         url: URL,
         depth: Int = 0,
         expandedURLs: Set<URL> = [],
-        rootURL: URL? = nil
+        rootURL: URL? = nil,
+        hiddenURLs: Set<URL> = []
     ) -> [SidebarItem] {
         let effectiveRoot = rootURL ?? url
 
@@ -40,6 +41,7 @@ struct SidebarItem {
         ) else { return [] }
 
         let filtered = entries.filter { entry in
+            guard !hiddenURLs.contains(entry.standardizedFileURL) else { return false }
             let isDir = (try? entry.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
             return isDir || entry.pathExtension.lowercased() == "md"
         }
@@ -65,7 +67,7 @@ struct SidebarItem {
                 rootURL: effectiveRoot
             ))
             if expanded {
-                result += loadDirectory(url: entry, depth: depth + 1, expandedURLs: expandedURLs, rootURL: effectiveRoot)
+                result += loadDirectory(url: entry, depth: depth + 1, expandedURLs: expandedURLs, rootURL: effectiveRoot, hiddenURLs: hiddenURLs)
             }
         }
         return result
