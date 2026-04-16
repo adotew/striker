@@ -74,12 +74,18 @@ final class EditorViewController: NSViewController {
         textContainer.widthTracksTextView = true
         layoutManager.addTextContainer(textContainer)
 
-        textView = StrikerTextView(frame: .zero, textContainer: textContainer)
+        let contentSize = scrollView.contentSize
+        textView = StrikerTextView(
+            frame: NSRect(x: 0, y: 0, width: contentSize.width, height: contentSize.height),
+            textContainer: textContainer
+        )
 
         // Layout
         textView.autoresizingMask        = [.width]
         textView.isVerticallyResizable   = true
         textView.isHorizontallyResizable = false
+        textView.minSize = NSSize(width: 0, height: contentSize.height)
+        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
         textView.textContainerInset = NSSize(width: 20, height: 20)
 
         // Editing
