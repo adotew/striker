@@ -71,5 +71,30 @@ Formatting toolbar, file watching, preferences, final touches.
 
 ---
 
+## Details
+Fix bugs, UX gaps, and polish items found during code review.
+
+### Bugs
+- [ ] **D.1** Fix `FileWatcher` thread-safety — `ignore(url:)` writes `ignoredPaths` from the main thread, but `handleIncoming()` reads/writes it on `callbackQueue`. Synchronize access with a lock or dispatch to the same queue.
+- [ ] **D.2** Extend `FileWatcher` ignore window — currently 0.6s but autosave debounces at 2.5s. A save can trigger after the ignore window expires, causing a false "file changed externally" alert. Increase to ≥3s.
+- [ ] **D.3** Remove force-unwraps in `FormattingToolbar.show(for:)` — `textView.layoutManager!` and `textView.textContainer!` can crash in edge cases. Use `guard let` instead.
+- [ ] **D.4** Add `scrollRangeToVisible()` after cursor restore in `EditorViewController.reloadCurrentFileFromDisk()` — cursor is restored but view doesn't scroll to it.
+
+### UX Gaps
+- [ ] **D.5** Add empty state to sidebar — when the directory has no notes, show a placeholder message ("No notes yet") instead of a blank table.
+- [ ] **D.6** Enable Cmd+F (find) — wire up `NSTextView`'s built-in find bar via `performFindPanelAction` in `StrikerTextView.performKeyEquivalent`.
+- [ ] **D.7** Add dirty indicator — show a visual cue (e.g. dot in the status bar icon or sidebar filename) when the current file has unsaved changes.
+- [ ] **D.8** Pre-select text in rename alert — call `tf.selectAll(nil)` in `SidebarController.promptRename()` so the user can type immediately.
+- [ ] **D.9** Add H4 button to `FormattingToolbar` — spec says H1–H4, only H1–H3 are present.
+
+### Nice-to-Haves
+- [ ] **D.10** Cache `resourceValues` in `SidebarItem.loadDirectory()` — currently calls it multiple times per entry, causing redundant syscalls on large directories.
+- [ ] **D.11** Handle deleted-file-while-editing — if the current file is deleted externally, notify the user instead of showing stale content silently.
+- [ ] **D.12** Guide user on Accessibility permission — global hotkey (`NSEvent.addGlobalMonitorForEvents`) requires Accessibility access. Show a prompt or help text if it fails.
+
+**Done when:** No force-unwraps in toolbar, file watcher is thread-safe with no false alerts, sidebar has empty state, Cmd+F works, rename pre-selects text, dirty indicator visible.
+
+---
+
 ## Verification
 After each phase: `swift build` to confirm compilation, then `swift run` to manually test the acceptance criteria.

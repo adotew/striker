@@ -6,6 +6,21 @@ struct SidebarItem {
     let isDirectory: Bool
     let depth: Int
     var isExpanded: Bool
+    var isRootHeader: Bool = false
+    var rootURL: URL? = nil
+
+    /// Synthetic root header row — not a real filesystem item.
+    static func rootHeader(url: URL, isExpanded: Bool) -> SidebarItem {
+        SidebarItem(
+            url: url,
+            name: url.lastPathComponent,
+            isDirectory: true,
+            depth: 0,
+            isExpanded: isExpanded,
+            isRootHeader: true,
+            rootURL: url
+        )
+    }
 
     /// Returns a flat array representing the visible tree for `url`.
     /// Folders come before files (both alphabetical). Expanded folders
@@ -13,8 +28,11 @@ struct SidebarItem {
     static func loadDirectory(
         url: URL,
         depth: Int = 0,
-        expandedURLs: Set<URL> = []
+        expandedURLs: Set<URL> = [],
+        rootURL: URL? = nil
     ) -> [SidebarItem] {
+        let effectiveRoot = rootURL ?? url
+
         guard let entries = try? FileManager.default.contentsOfDirectory(
             at: url,
             includingPropertiesForKeys: [.isDirectoryKey],
@@ -42,10 +60,12 @@ struct SidebarItem {
                 name: entry.lastPathComponent,
                 isDirectory: isDir,
                 depth: depth,
-                isExpanded: expanded
+                isExpanded: expanded,
+                isRootHeader: false,
+                rootURL: effectiveRoot
             ))
             if expanded {
-                result += loadDirectory(url: entry, depth: depth + 1, expandedURLs: expandedURLs)
+                result += loadDirectory(url: entry, depth: depth + 1, expandedURLs: expandedURLs, rootURL: effectiveRoot)
             }
         }
         return result

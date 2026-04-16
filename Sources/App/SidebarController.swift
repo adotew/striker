@@ -13,13 +13,16 @@ protocol SidebarControllerDelegate: AnyObject {
 final class SidebarController: NSViewController {
 
     weak var delegate: SidebarControllerDelegate?
+    /// Called whenever the list of root folders changes (add/remove).
+    var onRootsChanged: (() -> Void)?
 
     private let scrollView = NSScrollView()
     private let tableView  = NSTableView()
 
-    private var rootURL: URL?
+    private(set) var rootURLs: [URL] = []
     private var items: [SidebarItem] = []
     private var expandedURLs: Set<URL> = []
+    private var collapsedRoots: Set<URL> = []
 
     // MARK: - View lifecycle
 
@@ -70,7 +73,25 @@ final class SidebarController: NSViewController {
     // MARK: - Public API
 
     func setDirectory(_ url: URL) {
-        rootURL = url
+        setDirectories([url])
+    }
+
+    func setDirectories(_ urls: [URL]) {
+        rootURLs = urls
+        reload()
+    }
+
+    func addDirectory(_ url: URL) {
+        let std = url.standardizedFileURL
+        guard !rootURLs.contains(where: { $0.standardizedFileURL == std }) else { return }
+        rootURLs.append(url)
+        reload()
+    }
+
+    func removeDirectory(_ url: URL) {
+        let std = url.standardizedFileURL
+        rootURLs.removeAll { $0.standardizedFileURL == std }
+        collapsedRoots.remove(url)
         reload()
     }
 
@@ -80,19 +101,25 @@ final class SidebarController: NSViewController {
 
     @discardableResult
     func selectFile(_ url: URL) -> Bool {
-        guard let rootURL else { return false }
-        let standardizedRoot = rootURL.standardizedFileURL
-        let standardizedTarget = url.standardizedFileURL
-        guard standardizedTarget.path.hasPrefix(standardizedRoot.path) else { return false }
+        let target = url.standardizedFileURL
+        guard let root = rootURLs.first(where: {
+            let r = $0.standardizedFileURL
+            return target.path == r.path || target.path.hasPrefix(r.path + "/")
+        }) else { return false }
 
-        var parent = standardizedTarget.deletingLastPathComponent()
-        while parent.path.hasPrefix(standardizedRoot.path), parent != standardizedRoot {
+        // Ensure root is not collapsed
+        collapsedRoots.remove(root)
+
+        // Expand ancestor directories up to root
+        var parent = target.deletingLastPathComponent()
+        let standardRoot = root.standardizedFileURL
+        while parent != standardRoot && parent.path.hasPrefix(standardRoot.path) {
             expandedURLs.insert(parent)
             parent = parent.deletingLastPathComponent()
         }
 
         reload()
-        guard let row = items.firstIndex(where: { $0.url.standardizedFileURL == standardizedTarget }) else {
+        guard let row = items.firstIndex(where: { $0.url.standardizedFileURL == target }) else {
             return false
         }
         tableView.scrollRowToVisible(row)
@@ -100,15 +127,19 @@ final class SidebarController: NSViewController {
         return true
     }
 
-    /// Creates a new note in the directory of the currently selected item (or root).
+    /// Creates a new note in the directory of the currently selected item (or first root).
     func createNoteInCurrentDirectory() {
         let targetDir: URL
         let selectedRow = tableView.selectedRow
         if selectedRow >= 0 {
             let item = items[selectedRow]
-            targetDir = item.isDirectory ? item.url : item.url.deletingLastPathComponent()
+            if item.isRootHeader {
+                targetDir = item.url
+            } else {
+                targetDir = item.isDirectory ? item.url : item.url.deletingLastPathComponent()
+            }
         } else {
-            targetDir = rootURL ?? URL(fileURLWithPath: NSHomeDirectory())
+            targetDir = rootURLs.first ?? URL(fileURLWithPath: NSHomeDirectory())
         }
         guard let newURL = try? FileManager.default.createNote(in: targetDir) else { return }
         reload()
@@ -119,8 +150,30 @@ final class SidebarController: NSViewController {
     // MARK: - Internal
 
     private func reload() {
-        guard let root = rootURL else { return }
-        items = SidebarItem.loadDirectory(url: root, expandedURLs: expandedURLs)
+        items = []
+        let showHeaders = rootURLs.count > 1
+
+        for root in rootURLs {
+            if showHeaders {
+                let isExpanded = !collapsedRoots.contains(root)
+                items.append(SidebarItem.rootHeader(url: root, isExpanded: isExpanded))
+                if isExpanded {
+                    items += SidebarItem.loadDirectory(
+                        url: root,
+                        depth: 1,
+                        expandedURLs: expandedURLs,
+                        rootURL: root
+                    )
+                }
+            } else {
+                items += SidebarItem.loadDirectory(
+                    url: root,
+                    depth: 0,
+                    expandedURLs: expandedURLs,
+                    rootURL: root
+                )
+            }
+        }
         tableView.reloadData()
     }
 
@@ -195,10 +248,25 @@ extension SidebarController: NSTableViewDelegate {
         return cell
     }
 
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        items[row].isRootHeader ? 24 : 28
+    }
+
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = tableView.selectedRow
         guard row >= 0 else { return }
         let item = items[row]
+
+        if item.isRootHeader {
+            if collapsedRoots.contains(item.url) {
+                collapsedRoots.remove(item.url)
+            } else {
+                collapsedRoots.insert(item.url)
+            }
+            tableView.deselectRow(row)
+            reload()
+            return
+        }
 
         if item.isDirectory {
             toggleExpand(at: row)
@@ -221,29 +289,31 @@ extension SidebarController: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         menu.removeAllItems()
         let clickedRow = tableView.clickedRow
-        let targetDir: URL
-        let clickedURL: URL?
 
         if clickedRow >= 0 {
             let item = items[clickedRow]
-            clickedURL = item.url
-            targetDir = item.isDirectory ? item.url : item.url.deletingLastPathComponent()
-        } else {
-            clickedURL = nil
-            targetDir = rootURL ?? URL(fileURLWithPath: NSHomeDirectory())
-        }
 
-        addMenuItem(to: menu, title: "New Note",   action: #selector(menuNewNote(_:)),   object: targetDir)
-        addMenuItem(to: menu, title: "New Folder", action: #selector(menuNewFolder(_:)), object: targetDir)
+            if item.isRootHeader {
+                addMenuItem(to: menu, title: "New Note",      action: #selector(menuNewNote(_:)),      object: item.url)
+                addMenuItem(to: menu, title: "New Folder",    action: #selector(menuNewFolder(_:)),    object: item.url)
+                menu.addItem(.separator())
+                addMenuItem(to: menu, title: "Remove Folder", action: #selector(menuRemoveRoot(_:)),   object: item.url)
+                return
+            }
 
-        if let url = clickedURL {
+            let targetDir = item.isDirectory ? item.url : item.url.deletingLastPathComponent()
+            addMenuItem(to: menu, title: "New Note",   action: #selector(menuNewNote(_:)),   object: targetDir)
+            addMenuItem(to: menu, title: "New Folder", action: #selector(menuNewFolder(_:)), object: targetDir)
             menu.addItem(.separator())
-            addMenuItem(to: menu, title: "Rename", action: #selector(menuRename(_:)), object: url)
-            addMenuItem(to: menu, title: "Delete", action: #selector(menuDelete(_:)), object: url)
+            addMenuItem(to: menu, title: "Rename", action: #selector(menuRename(_:)), object: item.url)
+            addMenuItem(to: menu, title: "Delete", action: #selector(menuDelete(_:)), object: item.url)
+
+        } else {
+            addMenuItem(to: menu, title: "Add Folder", action: #selector(menuAddFolder(_:)), object: nil)
         }
     }
 
-    private func addMenuItem(to menu: NSMenu, title: String, action: Selector, object: Any) {
+    private func addMenuItem(to menu: NSMenu, title: String, action: Selector, object: Any?) {
         let item = NSMenuItem(title: title, action: action, keyEquivalent: "")
         item.target = self
         item.representedObject = object
@@ -286,6 +356,20 @@ extension SidebarController: NSMenuDelegate {
             self?.reload()
         }
     }
+
+    @objc private func menuRemoveRoot(_ sender: NSMenuItem) {
+        guard let url = sender.representedObject as? URL else { return }
+        removeDirectory(url)
+        onRootsChanged?()
+    }
+
+    @objc private func menuAddFolder(_ sender: NSMenuItem) {
+        DirectoryPicker.pick { [weak self] url in
+            guard let self, let url else { return }
+            self.addDirectory(url)
+            self.onRootsChanged?()
+        }
+    }
 }
 
 // MARK: - SidebarCellView
@@ -310,7 +394,6 @@ final class SidebarCellView: NSTableCellView {
         addSubview(iconView)
 
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.font = .systemFont(ofSize: 13)
         nameLabel.lineBreakMode = .byTruncatingTail
         nameLabel.cell?.wraps = false
         addSubview(nameLabel)
@@ -330,7 +413,19 @@ final class SidebarCellView: NSTableCellView {
     }
 
     func configure(with item: SidebarItem) {
+        if item.isRootHeader {
+            indentConstraint.constant = 8
+            let chevron = item.isExpanded ? "chevron.down" : "chevron.right"
+            iconView.image = NSImage(systemSymbolName: chevron, accessibilityDescription: nil)
+            iconView.contentTintColor = .secondaryLabelColor
+            nameLabel.stringValue = item.name.uppercased()
+            nameLabel.font = .systemFont(ofSize: 11, weight: .semibold)
+            nameLabel.textColor = .secondaryLabelColor
+            return
+        }
+
         indentConstraint.constant = CGFloat(item.depth) * 16 + 8
+        iconView.contentTintColor = nil
 
         if item.isDirectory {
             let symbolName = item.isExpanded ? "folder.fill" : "folder"
@@ -341,5 +436,7 @@ final class SidebarCellView: NSTableCellView {
             let base = item.name
             nameLabel.stringValue = base.hasSuffix(".md") ? String(base.dropLast(3)) : base
         }
+        nameLabel.font = .systemFont(ofSize: 13)
+        nameLabel.textColor = .labelColor
     }
 }

@@ -17,7 +17,8 @@ final class FileWatcher {
         stop()
     }
 
-    func startWatching(rootURL: URL) {
+    func startWatching(rootURLs: [URL]) {
+        guard !rootURLs.isEmpty else { stop(); return }
         stop()
 
         var context = FSEventStreamContext(
@@ -28,7 +29,7 @@ final class FileWatcher {
             copyDescription: nil
         )
 
-        let pathsToWatch = [rootURL.path] as CFArray
+        let pathsToWatch = rootURLs.map(\.path) as CFArray
         let flags = FSEventStreamCreateFlags(
             kFSEventStreamCreateFlagUseCFTypes |
             kFSEventStreamCreateFlagFileEvents |

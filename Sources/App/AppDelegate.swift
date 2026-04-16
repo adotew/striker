@@ -42,12 +42,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             object: nil
         )
 
-        let restoredURL = DirectoryPicker.resolveBookmark()
-        if let url = restoredURL, setNotesDirectory(url) {
+        let hadBookmarks = UserDefaults.standard.data(forKey: "notesDirectoryBookmark") != nil
+                        || (UserDefaults.standard.array(forKey: "notesDirectoryBookmarks") as? [Data])?.isEmpty == false
+        DirectoryPicker.migrateLegacyBookmarkIfNeeded()
+        let restoredURLs = DirectoryPicker.resolveAllBookmarks().filter { isValidNotesDirectory($0) }
+        if !restoredURLs.isEmpty {
+            mainViewController.setDirectories(restoredURLs)
             floatingPanel.toggle()
             return
         }
-        if restoredURL != nil {
+        if hadBookmarks {
             showDirectoryUnavailableAlert()
         }
         floatingPanel.toggle()
@@ -70,6 +74,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @discardableResult
     private func setNotesDirectory(_ url: URL) -> Bool {
         guard isValidNotesDirectory(url) else { return false }
+        DirectoryPicker.appendBookmark(for: url)
         mainViewController.setDirectory(url)
         return true
     }
@@ -82,10 +87,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func promptForNotesDirectory() {
         DirectoryPicker.pick { [weak self] url in
             guard let self, let url else { return }
-            if !self.setNotesDirectory(url) {
+            guard self.isValidNotesDirectory(url) else {
                 self.showDirectoryUnavailableAlert()
                 self.promptForNotesDirectory()
+                return
             }
+            DirectoryPicker.appendBookmark(for: url)
+            self.mainViewController.setDirectory(url)
         }
     }
 

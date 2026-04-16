@@ -6,8 +6,11 @@ final class MainViewController: NSSplitViewController {
     let editorViewController = EditorViewController()
     private let fileWatcher = FileWatcher()
     private var isShowingExternalChangeAlert = false
-    private(set) var currentDirectoryURL: URL?
+    private var rootURLs: [URL] = []
     private let lastOpenFileBookmarkKey = "lastOpenFileBookmark"
+
+    /// Exposes the first root for callsites that only need one (e.g. Preferences).
+    var currentDirectoryURL: URL? { rootURLs.first }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,14 @@ final class MainViewController: NSSplitViewController {
         addSplitViewItem(editorItem)
 
         sidebarController.delegate = self
+
+        sidebarController.onRootsChanged = { [weak self] in
+            guard let self else { return }
+            let newRoots = self.sidebarController.rootURLs
+            self.rootURLs = newRoots
+            self.fileWatcher.startWatching(rootURLs: newRoots)
+            DirectoryPicker.storeAllBookmarks(urls: newRoots)
+        }
 
         NotificationCenter.default.addObserver(
             self,
@@ -56,11 +67,17 @@ final class MainViewController: NSSplitViewController {
         fileWatcher.stop()
     }
 
+    // MARK: - Directory management
+
     func setDirectory(_ url: URL) {
-        currentDirectoryURL = url
-        sidebarController.setDirectory(url)
-        fileWatcher.startWatching(rootURL: url)
-        restoreLastOpenFileIfPossible(in: url)
+        setDirectories([url])
+    }
+
+    func setDirectories(_ urls: [URL]) {
+        rootURLs = urls
+        sidebarController.setDirectories(urls)
+        fileWatcher.startWatching(rootURLs: urls)
+        restoreLastOpenFileIfPossible(inAnyOf: urls)
     }
 
     func toggleRawMode() {
@@ -70,6 +87,8 @@ final class MainViewController: NSSplitViewController {
     var isRawMode: Bool {
         editorViewController.isRawMode
     }
+
+    // MARK: - Notifications
 
     @objc private func handleToggleSidebar() {
         toggleSidebar(nil)
@@ -83,6 +102,8 @@ final class MainViewController: NSSplitViewController {
         guard let url = notification.object as? URL else { return }
         fileWatcher.ignore(url: url)
     }
+
+    // MARK: - File watcher events
 
     private func handleFileWatcherEvents(_ urls: [URL]) {
         sidebarController.refresh()
@@ -126,6 +147,8 @@ final class MainViewController: NSSplitViewController {
         }
     }
 
+    // MARK: - Last-open file persistence
+
     private func storeLastOpenFile(_ url: URL) {
         guard let data = try? url.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil) else {
             return
@@ -133,7 +156,7 @@ final class MainViewController: NSSplitViewController {
         UserDefaults.standard.set(data, forKey: lastOpenFileBookmarkKey)
     }
 
-    private func restoreLastOpenFileIfPossible(in directory: URL) {
+    private func restoreLastOpenFileIfPossible(inAnyOf directories: [URL]) {
         guard let data = UserDefaults.standard.data(forKey: lastOpenFileBookmarkKey) else { return }
         var isStale = false
         guard let restoredURL = try? URL(
@@ -147,9 +170,11 @@ final class MainViewController: NSSplitViewController {
         }
 
         let target = restoredURL.standardizedFileURL
-        let root = directory.standardizedFileURL
-        let inRoot = target.path == root.path || target.path.hasPrefix(root.path + "/")
-        guard inRoot, FileManager.default.fileExists(atPath: target.path) else {
+        let inARoot = directories.contains {
+            let root = $0.standardizedFileURL
+            return target.path == root.path || target.path.hasPrefix(root.path + "/")
+        }
+        guard inARoot, FileManager.default.fileExists(atPath: target.path) else {
             UserDefaults.standard.removeObject(forKey: lastOpenFileBookmarkKey)
             return
         }
@@ -162,7 +187,6 @@ final class MainViewController: NSSplitViewController {
 extension MainViewController: SidebarControllerDelegate {
 
     func sidebarController(_ sidebar: SidebarController, shouldSelectFile url: URL) -> Bool {
-        // Save the current file before switching
         editorViewController.save()
         return true
     }
