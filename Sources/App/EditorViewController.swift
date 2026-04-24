@@ -14,6 +14,19 @@ final class EditorViewController: NSViewController {
     private let formattingToolbar = FormattingToolbar()
     private var currentURL: URL?
 
+    private let rawModeBadge: NSTextField = {
+        let label = NSTextField(labelWithString: "RAW")
+        label.font = .monospacedSystemFont(ofSize: 10, weight: .medium)
+        label.textColor = NSColor.secondaryLabelColor
+        label.backgroundColor = NSColor(white: 0.5, alpha: 0.12)
+        label.isBezeled = false
+        label.isEditable = false
+        label.wantsLayer = true
+        label.layer?.cornerRadius = 4
+        label.alphaValue = 0
+        return label
+    }()
+
     // MARK: - View lifecycle
 
     override func loadView() {
@@ -26,6 +39,7 @@ final class EditorViewController: NSViewController {
         setupTextSystem()
         setupAutoSave()
         setupFormattingToolbar()
+        setupRawModeBadge()
     }
 
     override func viewDidAppear() {
@@ -131,6 +145,15 @@ final class EditorViewController: NSViewController {
         )
     }
 
+    private func setupRawModeBadge() {
+        view.addSubview(rawModeBadge)
+        rawModeBadge.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rawModeBadge.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            rawModeBadge.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12),
+        ])
+    }
+
     private func saveCurrentFile() {
         guard let url = currentURL else { return }
         do {
@@ -175,6 +198,15 @@ final class EditorViewController: NSViewController {
     func toggleRawMode() {
         markdownStorage.isRawMode.toggle()
         updateFormattingToolbar()
+        updateRawModeBadge()
+    }
+
+    private func updateRawModeBadge() {
+        let show = markdownStorage.isRawMode
+        NSAnimationContext.runAnimationGroup { ctx in
+            ctx.duration = 0.15
+            rawModeBadge.animator().alphaValue = show ? 1 : 0
+        }
     }
 
     // MARK: - Window key notifications
