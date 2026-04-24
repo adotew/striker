@@ -26,6 +26,11 @@ let package = Package(
             name: "Striker",
             dependencies: ["CMarkGFM"],
             path: "Sources/App"
+        ),
+        .testTarget(
+            name: "StrikerTests",
+            dependencies: ["Striker"],
+            path: "Tests/StrikerTests"
         )
     ]
 )

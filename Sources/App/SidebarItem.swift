@@ -1,13 +1,33 @@
 import Foundation
 
 struct SidebarItem {
+    enum Kind {
+        case normal
+        case rootHeader
+        case emptyFolderHint(parent: URL)
+    }
+
     let url: URL
     let name: String
     let isDirectory: Bool
     let depth: Int
     var isExpanded: Bool
-    var isRootHeader: Bool = false
+    var kind: Kind = .normal
     var rootURL: URL? = nil
+
+    var isRootHeader: Bool {
+        if case .rootHeader = kind { return true }
+        return false
+    }
+
+    var emptyFolderParentURL: URL? {
+        if case let .emptyFolderHint(parent) = kind { return parent }
+        return nil
+    }
+
+    var isEmptyFolderHint: Bool {
+        emptyFolderParentURL != nil
+    }
 
     /// Synthetic root header row — not a real filesystem item.
     static func rootHeader(url: URL, isExpanded: Bool) -> SidebarItem {
@@ -17,8 +37,21 @@ struct SidebarItem {
             isDirectory: true,
             depth: 0,
             isExpanded: isExpanded,
-            isRootHeader: true,
+            kind: .rootHeader,
             rootURL: url
+        )
+    }
+
+    /// Synthetic empty-hint row for an expanded folder that has no visible children.
+    static func emptyFolderHint(parentURL: URL, depth: Int, rootURL: URL?) -> SidebarItem {
+        SidebarItem(
+            url: parentURL,
+            name: "New Note",
+            isDirectory: false,
+            depth: depth,
+            isExpanded: false,
+            kind: .emptyFolderHint(parent: parentURL),
+            rootURL: rootURL
         )
     }
 
@@ -63,11 +96,22 @@ struct SidebarItem {
                 isDirectory: isDir,
                 depth: depth,
                 isExpanded: expanded,
-                isRootHeader: false,
+                kind: .normal,
                 rootURL: effectiveRoot
             ))
             if expanded {
-                result += loadDirectory(url: entry, depth: depth + 1, expandedURLs: expandedURLs, rootURL: effectiveRoot, hiddenURLs: hiddenURLs)
+                let children = loadDirectory(
+                    url: entry,
+                    depth: depth + 1,
+                    expandedURLs: expandedURLs,
+                    rootURL: effectiveRoot,
+                    hiddenURLs: hiddenURLs
+                )
+                if children.isEmpty {
+                    result.append(.emptyFolderHint(parentURL: entry, depth: depth + 1, rootURL: effectiveRoot))
+                } else {
+                    result += children
+                }
             }
         }
         return result

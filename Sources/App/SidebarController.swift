@@ -18,6 +18,7 @@ final class SidebarController: NSViewController {
 
     private let scrollView = NSScrollView()
     private let tableView  = NSTableView()
+    private let emptyStateView = EmptyNotesView()
 
     private(set) var rootURLs: [URL] = []
     private var items: [SidebarItem] = []
@@ -72,6 +73,20 @@ final class SidebarController: NSViewController {
         let menu = NSMenu()
         menu.delegate = self
         tableView.menu = menu
+
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        emptyStateView.isHidden = true
+        scrollView.isHidden = false
+        emptyStateView.onAddNote = { [weak self] in
+            self?.createNoteInCurrentDirectory()
+        }
+        view.addSubview(emptyStateView)
+        NSLayoutConstraint.activate([
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
 
     // MARK: - Public API
@@ -139,6 +154,8 @@ final class SidebarController: NSViewController {
             let item = items[selectedRow]
             if item.isRootHeader {
                 targetDir = item.url
+            } else if let parent = item.emptyFolderParentURL {
+                targetDir = parent
             } else {
                 targetDir = item.isDirectory ? item.url : item.url.deletingLastPathComponent()
             }
@@ -162,25 +179,58 @@ final class SidebarController: NSViewController {
                 let isExpanded = !collapsedRoots.contains(root)
                 items.append(SidebarItem.rootHeader(url: root, isExpanded: isExpanded))
                 if isExpanded {
-                    items += SidebarItem.loadDirectory(
+                    let children = SidebarItem.loadDirectory(
                         url: root,
                         depth: 1,
                         expandedURLs: expandedURLs,
                         rootURL: root,
                         hiddenURLs: hiddenFileURLs
                     )
+                    if children.isEmpty {
+                        items.append(.emptyFolderHint(parentURL: root, depth: 1, rootURL: root))
+                    } else {
+                        items += children
+                    }
                 }
             } else {
-                items += SidebarItem.loadDirectory(
+                let children = SidebarItem.loadDirectory(
                     url: root,
                     depth: 0,
                     expandedURLs: expandedURLs,
                     rootURL: root,
                     hiddenURLs: hiddenFileURLs
                 )
+                if children.isEmpty {
+                    items.append(.emptyFolderHint(parentURL: root, depth: 0, rootURL: root))
+                } else {
+                    items += children
+                }
             }
         }
         tableView.reloadData()
+
+        // Show empty state only when root directories truly have no markdown files on disk
+        let shouldShowEmpty = !rootURLs.isEmpty && !rootURLs.contains { hasMarkdownFiles(in: $0) }
+        scrollView.isHidden = shouldShowEmpty
+        emptyStateView.isHidden = !shouldShowEmpty
+    }
+
+    private func hasMarkdownFiles(in url: URL) -> Bool {
+        guard let entries = try? FileManager.default.contentsOfDirectory(
+            at: url,
+            includingPropertiesForKeys: [.isDirectoryKey],
+            options: .skipsHiddenFiles
+        ) else { return false }
+        for entry in entries {
+            let isDir = (try? entry.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
+            if isDir {
+                if hasMarkdownFiles(in: entry) { return true }
+            } else if entry.pathExtension.lowercased() == "md"
+                   && !hiddenFileURLs.contains(entry.standardizedFileURL) {
+                return true
+            }
+        }
+        return false
     }
 
     private func toggleExpand(at row: Int) {
@@ -280,6 +330,17 @@ extension SidebarController: NSTableViewDelegate {
             return
         }
 
+        if let parentDir = item.emptyFolderParentURL {
+            guard let newURL = try? FileManager.default.createNote(in: parentDir) else {
+                tableView.deselectRow(row)
+                return
+            }
+            reload()
+            select(url: newURL)
+            promptRename(url: newURL)
+            return
+        }
+
         if delegate?.sidebarController(self, shouldSelectFile: item.url) == false {
             tableView.deselectRow(row)
             return
@@ -304,6 +365,12 @@ extension SidebarController: NSMenuDelegate {
                 addMenuItem(to: menu, title: "New Folder",    action: #selector(menuNewFolder(_:)),    object: item.url)
                 menu.addItem(.separator())
                 addMenuItem(to: menu, title: "Remove Folder", action: #selector(menuRemoveRoot(_:)),   object: item.url)
+                return
+            }
+
+            if let parentDir = item.emptyFolderParentURL {
+                addMenuItem(to: menu, title: "New Note", action: #selector(menuNewNote(_:)), object: parentDir)
+                addMenuItem(to: menu, title: "New Folder", action: #selector(menuNewFolder(_:)), object: parentDir)
                 return
             }
 
@@ -443,6 +510,15 @@ final class SidebarCellView: NSTableCellView {
         indentConstraint.constant = CGFloat(item.depth) * 16 + 8
         iconView.contentTintColor = nil
 
+        if item.isEmptyFolderHint {
+            iconView.image = NSImage(systemSymbolName: "plus.circle", accessibilityDescription: nil)
+            iconView.contentTintColor = .tertiaryLabelColor
+            nameLabel.stringValue = item.name
+            nameLabel.font = .systemFont(ofSize: 12)
+            nameLabel.textColor = .tertiaryLabelColor
+            return
+        }
+
         if item.isDirectory {
             let symbolName = item.isExpanded ? "folder.fill" : "folder"
             iconView.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: nil)
@@ -454,5 +530,50 @@ final class SidebarCellView: NSTableCellView {
         }
         nameLabel.font = .systemFont(ofSize: 13)
         nameLabel.textColor = .labelColor
+    }
+}
+
+// MARK: - EmptyNotesView
+
+final class EmptyNotesView: NSView {
+
+    var onAddNote: (() -> Void)?
+
+    private let label = NSTextField(labelWithString: "No notes yet")
+    private let button = NSButton()
+
+    override init(frame: NSRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder: NSCoder) { fatalError() }
+
+    private func setup() {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = .tertiaryLabelColor
+        label.alignment = .center
+        addSubview(label)
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.title = "New Note"
+        button.bezelStyle = .rounded
+        button.controlSize = .small
+        button.target = self
+        button.action = #selector(addNoteTapped)
+        addSubview(button)
+
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -16),
+
+            button.centerXAnchor.constraint(equalTo: centerXAnchor),
+            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+        ])
+    }
+
+    @objc private func addNoteTapped() {
+        onAddNote?()
     }
 }
