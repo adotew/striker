@@ -8,6 +8,9 @@ protocol StrikerTextViewDelegate: AnyObject {
     func strikerTextViewClose(_ textView: StrikerTextView)
     func strikerTextViewToggleRawMode(_ textView: StrikerTextView)
     func strikerTextViewToggleSidebar(_ textView: StrikerTextView)
+    func strikerTextViewDidTypeSlash(_ textView: StrikerTextView)
+    /// Return true if the key event was handled (e.g. routed to the slash command menu).
+    func strikerTextViewInterceptKey(_ event: NSEvent) -> Bool
 }
 
 // MARK: - StrikerTextView
@@ -65,6 +68,21 @@ final class StrikerTextView: NSTextView {
             return true
         default:
             return super.performKeyEquivalent(with: event)
+        }
+    }
+
+    override func keyDown(with event: NSEvent) {
+        // Let the delegate intercept keys when the slash menu is open (↑↓/Enter/Escape)
+        if strikerDelegate?.strikerTextViewInterceptKey(event) == true { return }
+        super.keyDown(with: event)
+    }
+
+    override func insertText(_ string: Any, replacementRange: NSRange) {
+        super.insertText(string, replacementRange: replacementRange)
+        // Detect "/" after it's fully committed to the text storage
+        let inserted = (string as? String) ?? (string as? NSAttributedString)?.string ?? ""
+        if inserted == "/" {
+            strikerDelegate?.strikerTextViewDidTypeSlash(self)
         }
     }
 }

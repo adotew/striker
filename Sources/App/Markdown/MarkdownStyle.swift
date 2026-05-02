@@ -181,7 +181,7 @@ enum MarkdownStyle {
         case .heading(let level):
             // "## heading text" → hide "## " (level hashes + space)
             let prefixLen = level + 1  // hashes + space
-            guard prefixLen < r.length else { return [] }
+            guard prefixLen <= r.length else { return [] }
             return [NSRange(location: r.location, length: prefixLen)]
 
         case .strong:

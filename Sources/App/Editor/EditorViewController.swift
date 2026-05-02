@@ -12,6 +12,8 @@ final class EditorViewController: NSViewController {
     let markdownStorage = MarkdownTextStorage()
     private let autoSave  = AutoSaveController()
     private let formattingToolbar = FormattingToolbar()
+    private let slashMenu = SlashCommandMenu()
+    private var slashAnchorPosition: Int? = nil
     private var currentURL: URL?
 
     private let rawModeBadge: NSTextField = {
@@ -40,6 +42,9 @@ final class EditorViewController: NSViewController {
         setupAutoSave()
         setupFormattingToolbar()
         setupRawModeBadge()
+        slashMenu.onSelect = { [weak self] index in
+            self?.applySlashCommand(index)
+        }
     }
 
     override func viewDidAppear() {
@@ -57,6 +62,7 @@ final class EditorViewController: NSViewController {
         NotificationCenter.default.removeObserver(self, name: NSWindow.didResignKeyNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSView.boundsDidChangeNotification, object: scrollView.contentView)
         formattingToolbar.hide()
+        slashMenu.hide()
     }
 
     // MARK: - Setup
@@ -199,6 +205,8 @@ final class EditorViewController: NSViewController {
         markdownStorage.isRawMode.toggle()
         updateFormattingToolbar()
         updateRawModeBadge()
+        slashMenu.hide()
+        slashAnchorPosition = nil
     }
 
     private func updateRawModeBadge() {
@@ -214,6 +222,8 @@ final class EditorViewController: NSViewController {
     @objc private func windowDidResignKey(_ notification: Notification) {
         autoSave.saveNow()
         formattingToolbar.hide()
+        slashMenu.hide()
+        slashAnchorPosition = nil
     }
 
     @objc private func handleScrollBoundsChange(_ notification: Notification) {
@@ -254,6 +264,7 @@ extension EditorViewController: NSTextViewDelegate {
     func textDidChange(_ notification: Notification) {
         autoSave.markDirty()
         updateFormattingToolbar()
+        updateSlashMenu()
     }
 
     func textViewDidChangeSelection(_ notification: Notification) {
@@ -283,6 +294,104 @@ extension EditorViewController: StrikerTextViewDelegate {
 
     func strikerTextViewToggleSidebar(_ textView: StrikerTextView) {
         NotificationCenter.default.post(name: .strikerToggleSidebar, object: nil)
+    }
+
+    func strikerTextViewDidTypeSlash(_ textView: StrikerTextView) {
+        guard !markdownStorage.isRawMode else { return }
+        let cursorPos = textView.selectedRange().location
+        guard cursorPos >= 1 else { return }
+        let anchor = cursorPos - 1
+        slashAnchorPosition = anchor
+
+        guard let layoutManager = textView.layoutManager,
+              let textContainer = textView.textContainer,
+              let window = view.window else { return }
+
+        // Use layoutManager rect (same as FormattingToolbar) — reliable after text insertion
+        let slashCharRange = NSRange(location: anchor, length: 1)
+        let glyphRange = layoutManager.glyphRange(forCharacterRange: slashCharRange, actualCharacterRange: nil)
+        var charRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        charRect.origin.x += textView.textContainerOrigin.x
+        charRect.origin.y += textView.textContainerOrigin.y
+        let rectInWindow = textView.convert(charRect, to: nil)
+        let caretRect = window.convertToScreen(rectInWindow)
+
+        slashMenu.show(caretRect: caretRect, in: window)
+    }
+
+    func strikerTextViewInterceptKey(_ event: NSEvent) -> Bool {
+        guard slashMenu.isVisible else { return false }
+        switch event.keyCode {
+        case 125: slashMenu.moveDown(); return true          // ↓
+        case 126: slashMenu.moveUp();   return true          // ↑
+        case 36, 76: slashMenu.confirmSelection(); return true  // Return / numpad Enter
+        case 53:                                             // Escape
+            slashMenu.hide()
+            slashAnchorPosition = nil
+            return true
+        default: return false
+        }
+    }
+
+    // MARK: - Slash menu helpers
+
+    private func updateSlashMenu() {
+        guard let anchor = slashAnchorPosition else { return }
+        let nsText = textView.string as NSString
+        let textLen = nsText.length
+        let cursorPos = textView.selectedRange().location
+        let slashChar: unichar = "/".utf16.first!
+
+        if anchor >= textLen || nsText.character(at: anchor) != slashChar || cursorPos <= anchor {
+            slashMenu.hide()
+            slashAnchorPosition = nil
+            return
+        }
+
+        let filterLen = cursorPos - anchor - 1
+        slashMenu.filterString = filterLen > 0
+            ? nsText.substring(with: NSRange(location: anchor + 1, length: filterLen))
+            : ""
+
+        if slashMenu.hasNoResults {
+            slashMenu.hide()
+            slashAnchorPosition = nil
+        }
+    }
+
+    private func applySlashCommand(_ actionIndex: Int) {
+        guard let anchor = slashAnchorPosition else { return }
+        let tv = textView!
+        let cursorPos = tv.selectedRange().location
+
+        // Delete "/" plus any filter text the user typed
+        let deleteLen = cursorPos - anchor
+        if deleteLen > 0 {
+            let deleteRange = NSRange(location: anchor, length: deleteLen)
+            if tv.shouldChangeText(in: deleteRange, replacementString: "") {
+                tv.textStorage?.replaceCharacters(in: deleteRange, with: "")
+                tv.didChangeText()
+            }
+        }
+
+        tv.setSelectedRange(NSRange(location: anchor, length: 0))
+        slashAnchorPosition = nil
+
+        formattingToolbar.apply(actionAt: actionIndex, to: tv)
+
+        let action = FormattingToolbar.actions[actionIndex]
+        if !action.suffix.isEmpty {
+            // Inline: park cursor between the delimiters
+            let cursorAfter = anchor + action.prefix.count
+            tv.setSelectedRange(NSRange(location: cursorAfter, length: 0))
+        } else if !markdownStorage.isRawMode {
+            // Heading: cursor sits right after the hidden "# " prefix.
+            // The preceding char has near-zero font (hiddenSyntaxAttributes),
+            // so NSTextView draws an invisible cursor. Fix by setting typingAttributes
+            // to the heading font so the caret uses the correct line height.
+            let level = action.prefix.count - 1  // "# "→1, "## "→2, "### "→3
+            tv.typingAttributes = MarkdownStyle.attributes(for: .heading(level: level))
+        }
     }
 }
 

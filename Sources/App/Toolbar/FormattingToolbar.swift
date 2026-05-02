@@ -7,7 +7,7 @@ final class FormattingToolbar: NSPanel {
     private weak var targetTextView: NSTextView?
     private var buttons: [NSButton] = []
 
-    private struct Action {
+    struct Action {
         let title: String
         let symbol: String
         let prefix: String
@@ -15,7 +15,7 @@ final class FormattingToolbar: NSPanel {
         let matchesNodeType: ((MarkdownNodeType) -> Bool)?
     }
 
-    private static let actions: [Action] = [
+    static let actions: [Action] = [
         Action(title: "H1", symbol: "textformat.size.larger",                   prefix: "# ",   suffix: "",       matchesNodeType: nil),
         Action(title: "H2", symbol: "textformat.size",                           prefix: "## ",  suffix: "",       matchesNodeType: nil),
         Action(title: "H3", symbol: "textformat.size.smaller",                   prefix: "### ", suffix: "",       matchesNodeType: nil),
@@ -169,12 +169,18 @@ final class FormattingToolbar: NSPanel {
     // MARK: - Actions
 
     @objc private func buttonTapped(_ sender: NSButton) {
-        guard let textView = targetTextView,
-              sender.tag < Self.actions.count else { return }
+        guard let textView = targetTextView else { return }
+        apply(actionAt: sender.tag, to: textView)
+        updateButtonStates(for: textView)
+    }
 
-        let action = Self.actions[sender.tag]
+    /// Apply a formatting action by index to the given text view.
+    /// Called by both the toolbar buttons and the slash command menu.
+    func apply(actionAt index: Int, to textView: NSTextView) {
+        guard index < Self.actions.count else { return }
+
+        let action = Self.actions[index]
         let selRange = textView.selectedRange()
-
         let nsString = textView.string as NSString
         let selectedText = nsString.substring(with: selRange)
 
@@ -205,7 +211,7 @@ final class FormattingToolbar: NSPanel {
                 textView.didChangeText()
             }
         } else {
-            // Inline wrapper: use CMarkParser to detect active range (works in both raw and styled mode)
+            // Inline wrapper: use CMarkParser to detect active range
             let parsed = CMarkParser.parse(textView.string)
             let activeNodeRange: NSRange? = {
                 guard let matcher = action.matchesNodeType else { return nil }
@@ -235,7 +241,6 @@ final class FormattingToolbar: NSPanel {
                     textView.didChangeText()
                 }
             }
-            updateButtonStates(for: textView)
         }
     }
 }
